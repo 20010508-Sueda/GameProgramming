@@ -15,6 +15,22 @@ class CModelX; //CModelXクラスの宣言
 class CMaterial; //クラスの宣言
 
 /*
+CAnimationSet
+アニメーションセット
+*/
+class CAnimationSet{
+public:
+	//アニメーションセット名
+	char*mpName;
+
+	CAnimationSet(CModelX*model);
+
+	~CAnimationSet(){
+		SAFE_DELETE_ARRAY(mpName);
+	}
+};
+
+/*
 CSkinWeights
 スキンウェイトクラス
 */
@@ -112,6 +128,8 @@ public:
 	char*mpPointer;        //読み込み位置
 	char mToken[1024];    //取り出した単語の領域
 	std::vector<CModelXFrame*>mFrame;   //フレームの配列
+	//アニメーションセットの配列
+	std::vector<CAnimationSet*>mAnimationSet;
 
 	CModelX()
 		:mpPointer(0)
@@ -121,6 +139,9 @@ public:
 		if (mFrame.size() > 0)
 		{
 			delete mFrame[0];
+		}
+		for (int i = 0; i < mAnimationSet.size(); i++){
+			delete mAnimationSet[i];
 		}
 	}
 
