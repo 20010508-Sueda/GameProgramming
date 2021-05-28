@@ -409,12 +409,63 @@ CAnimationSet::CAnimationSet(CModelX*model)
 		model->GetToken(); // } or Animation
 		if (strchr(model->mToken, '}'))break;
 		if (strcmp(model->mToken, "Animation") == 0){
-			//とりあえず読み飛ばし
-			model->SkipNode();
+			//Animation要素読み込み
+			mAnimation.push_back(new CAnimation(model));
 		}
 	}
 //デバッグバージョンのみ有効
 #ifdef _DEBUG
 	printf("AnimationSet:%s\n", mpName);
+#endif
+}
+
+/*
+FindFrame
+フレーム名に該当するフレームのアドレスを返す
+*/
+CModelXFrame*CModelX::FindFrame(char*name){
+	//イテレータの作成
+	std::vector<CModelXFrame*>::iterator itr;
+	//先頭から最後まで繰り返す
+	for (itr = mFrame.begin(); itr != mFrame.end(); itr++){
+		//名前が一致したか?
+		if (strcmp(name, (*itr)->mpName) == 0){
+			//一致したらそのアドレスを返す
+			return *itr;
+		}
+	}
+	//一致するフレームがない場合はNULLを返す
+	return NULL;
+}
+
+CAnimation::CAnimation(CModelX*model)
+:mpFrameName(0)
+, mFrameIndex(0)
+{
+	model->GetToken(); // { or Animation Name
+	if (strchr(model->mToken, '{')){
+		model->GetToken(); // {
+	}
+	else{
+		model->GetToken(); // {
+		model->GetToken(); // {
+	}
+
+	model->GetToken(); //FrameName
+	mpFrameName = new char[strlen(model->mToken) + 1];
+	strcpy(mpFrameName, model->mToken);
+	mFrameIndex = model->FindFrame(model->mToken)->mIndex;
+	model->GetToken(); // }
+
+	while (*model->mpPointer != '\0'){
+		model->GetToken(); // } or AnimationKey
+		if (strchr(model->mToken, '}'))break;
+		if (strcmp(model->mToken, "AnimationKey") == 0){
+			model->SkipNode();
+		}
+	}
+//デバッグバージョンのみ有効
+#ifdef _DEBUG
+	printf("Animation:%s\n", mpFrameName);
 #endif
 }
