@@ -546,7 +546,7 @@ CAnimation::CAnimation(CModelX*model)
 			//行列作成 Size * Rotation * Position
 			mpKey[i].mMatrix = key[1][i] * key[0][i] * key[2][i];
 			mpKey[i].mMatrix.Print();
-			break;
+			return;
 		}
 	}
 	//確保したエリア解放
