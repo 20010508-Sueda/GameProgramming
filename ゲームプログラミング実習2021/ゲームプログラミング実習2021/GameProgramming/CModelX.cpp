@@ -545,9 +545,8 @@ CAnimation::CAnimation(CModelX*model)
 			mpKey[i].mTime = time[2][i]; //Time
 			//行列作成 Size * Rotation * Position
 			mpKey[i].mMatrix = key[1][i] * key[0][i] * key[2][i];
-			mpKey[i].mMatrix.Print();
-			return;
 		}
+		mpKey[0].mMatrix.Print();
 	}
 	//確保したエリア解放
 	for (int i = 0; i < ARRAY_SIZE(key); i++){
