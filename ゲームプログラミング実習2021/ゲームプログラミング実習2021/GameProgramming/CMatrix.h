@@ -12,6 +12,8 @@ public:
 		//1次元配列として使う
 		float mF[16];
 	};
+	//3D各軸での値を設定
+	float mX, mY, mZ;
 	//表示確認用
 	//4×4の行列を画面出力
 	void Print();
@@ -39,6 +41,15 @@ public:
 	CMatrix operator*(const CMatrix &m);
 	//クオータニオンで回転行列を設定する
 	CMatrix SetQuaternion(float x, float y, float z, float w);
+	//*演算子のオーバーロード
+	//CMatrix * float の演算結果を返す
+	CMatrix operator*(const float &f);
+	//+演算子のオーバーロード
+	//CMatrix1 + CMatrix2 の演算結果を返す
+	CMatrix operator+(const CMatrix &m);
+	//+=演算子のオーバーロード
+	//CMatrix1 += CMatrix2 の演算を行う
+	void operator+=(const CMatrix &m);
 };
 #endif
 
