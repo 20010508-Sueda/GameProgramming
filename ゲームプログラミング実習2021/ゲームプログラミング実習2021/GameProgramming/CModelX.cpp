@@ -612,7 +612,7 @@ void CModelX::AnimateFrame(){
 			}
 			//デバッグバージョンのみ有効
 #ifdef _DEBUG
-			printf("Frame:%s\n", mFrame);
+			printf("Frame:%s\n", frame->mpName);
 			frame->mTransformMatrix.Print();
 #endif
 		}
