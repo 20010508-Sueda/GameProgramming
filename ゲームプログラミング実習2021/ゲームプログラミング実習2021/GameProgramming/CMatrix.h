@@ -12,8 +12,6 @@ public:
 		//1次元配列として使う
 		float mF[16];
 	};
-	//3D各軸での値を設定
-	float mX, mY, mZ;
 	//表示確認用
 	//4×4の行列を画面出力
 	void Print();

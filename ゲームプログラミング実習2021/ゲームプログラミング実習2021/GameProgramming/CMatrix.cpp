@@ -158,23 +158,21 @@ CMatrix CMatrix::SetQuaternion(float x, float y, float z, float w){
 //*演算子のオーバーロード
 //CMatrix * float の演算結果を返す
 CMatrix CMatrix::operator*(const float &f){
-	mM[0][0] * mX, mM[0][1] * mX, mM[0][2] * mX, mM[0][3] * mX;
-	mM[1][0] * mX, mM[1][1] * mX, mM[1][2] * mX, mM[1][3] * mX;
-	mM[2][0] * mX, mM[2][1] * mX, mM[2][2] * mX, mM[2][3] * mX;
-	mM[3][0] * mX, mM[3][1] * mX, mM[3][2] * mX, mM[3][3] * mX;
-	
-	return*this;
+	CMatrix tmp;  //リターン用のCMatrix変数
+	for (int i = 0; i < 16; i++){
+		tmp.mF[i] = mF[i] * f;
+	}
+	return tmp;
 }
 
 //+演算子のオーバーロード
 //CMatrix1 + CMatrix2 の演算結果を返す
 CMatrix CMatrix::operator+(const CMatrix &m){
-	mM[0][0] + m.mM[0][0] , mM[0][1] + m.mM[0][1] , mM[0][2] + m.mM[0][2] , mM[0][3] + m.mM[0][3];
-	mM[1][0] + m.mM[1][0] , mM[1][1] + m.mM[1][1] , mM[1][2] + m.mM[1][2] , mM[1][3] + m.mM[1][3];
-	mM[2][0] + m.mM[2][0] , mM[2][1] + m.mM[2][1] , mM[2][2] + m.mM[2][2] , mM[2][3] + m.mM[2][3];
-	mM[3][0] + m.mM[3][0] , mM[3][1] + m.mM[3][1] , mM[3][2] + m.mM[3][2] , mM[3][3] + m.mM[3][3];
-	
-	return*this;
+	CMatrix tmp;  //リターン用のCMatrix変数
+	for (int i = 0; i < 16; i++){
+		tmp.mF[i] = mF[i] + m.mF[i];
+	}
+	return tmp;
 }
 
 //+=演算子のオーバーロード
