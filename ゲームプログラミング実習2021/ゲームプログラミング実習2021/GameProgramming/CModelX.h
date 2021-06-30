@@ -141,6 +141,7 @@ class CModelXFrame{
 public:
 	std::vector<CModelXFrame*>mChild; //子フレームの配列
 	CMatrix mTransformMatrix;     //変換行列
+	CMatrix mCombinedMatrix;      //合成行列
 	char*mpName;     //フレーム名前
 	int mIndex;      //フレーム番号
 	CMesh mMesh;     //Meshデータ
@@ -157,6 +158,9 @@ public:
 		SAFE_DELETE_ARRAY(mpName);
 	}
 	void Render();
+
+	//合成行列の作成
+	void AnimateCombined(CMatrix*parent);
 };
 
 /*

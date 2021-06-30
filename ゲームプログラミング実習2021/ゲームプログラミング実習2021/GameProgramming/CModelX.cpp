@@ -398,7 +398,7 @@ CAnimationSet
 */
 CAnimationSet::CAnimationSet(CModelX*model)
 :mpName(nullptr)
-, mTime(45)
+, mTime(0)
 , mWeight(0)
 , mMaxTime(0)
 {
@@ -610,11 +610,29 @@ void CModelX::AnimateFrame(){
 					}
 				}
 			}
-			//デバッグバージョンのみ有効
+//デバッグバージョンのみ有効
 #ifdef _DEBUG
 			printf("Frame:%s\n", frame->mpName);
 			frame->mTransformMatrix.Print();
 #endif
 		}
 	}
+}
+
+/*
+AnimateCombined
+合成行列の作成
+*/
+void CModelXFrame::AnimateCombined(CMatrix*parent){
+	//自分の変換行列に、親からの変換行列を掛ける
+	mCombinedMatrix = mTransformMatrix*(*parent);
+	//子フレームの合成行列を作成する
+	for (int i = 0; i < mChild.size(); i++){
+		mChild[i]->AnimateCombined(&mCombinedMatrix);
+	}
+//デバッグバージョンのみ有効
+#ifdef _DEBUG
+	printf("Frame:%s\n", mpName);
+	mCombinedMatrix.Print();
+#endif
 }
