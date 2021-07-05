@@ -95,15 +95,17 @@ public:
 //CMeshクラスの定義
 class CMesh{
 public:
-	int mVertexNum;        //頂点数
-	CVector*mpVertex;      //頂点データ
-	int mFaceNum;          //面数
-	int *mpVertexIndex;    //面を構成する頂点記号
-	int mNormalNum;        //法線数
-	CVector*mpNormal;      //法線データ
-	int mMaterialNum;      //マテリアル数
-	int mMaterialIndexNum; //マテリアル番号数(面数)
-	int*mpMaterialIndex;   //マテリアル番号
+	int mVertexNum;          //頂点数
+	CVector*mpVertex;        //頂点データ
+	int mFaceNum;            //面数
+	int *mpVertexIndex;      //面を構成する頂点記号
+	int mNormalNum;          //法線数
+	CVector*mpNormal;        //法線データ
+	CVector*mpAnimateVertex; //アニメーション用頂点
+	CVector*mpAnimateNormal; //アニメーション用法線
+	int mMaterialNum;        //マテリアル数
+	int mMaterialIndexNum;   //マテリアル番号数(面数)
+	int*mpMaterialIndex;     //マテリアル番号
 	std::vector<CMaterial*>mMaterial; //マテリアルデータ
 	//スキンウェイト
 	std::vector<CSkinWeights*>mSkinWeights;
@@ -115,6 +117,8 @@ public:
 		, mpVertexIndex(nullptr)
 		, mNormalNum(0)
 		, mpNormal(nullptr)
+		, mpAnimateVertex(nullptr)
+		, mpAnimateNormal(nullptr)
 		, mMaterialNum(0)
 		, mMaterialIndexNum(0)
 		, mpMaterialIndex(nullptr)
@@ -124,6 +128,8 @@ public:
 		SAFE_DELETE_ARRAY(mpVertex);
 		SAFE_DELETE_ARRAY(mpVertexIndex);
 		SAFE_DELETE_ARRAY(mpNormal);
+		SAFE_DELETE_ARRAY(mpAnimateVertex);
+		SAFE_DELETE_ARRAY(mpAnimateNormal);
 		SAFE_DELETE_ARRAY(mpMaterialIndex);
 		//スキンウェイトの削除
 		for (int i = 0; i < mSkinWeights.size(); i++){
@@ -134,6 +140,9 @@ public:
 	void Init(CModelX*model);
 
 	void Render();
+
+	//頂点にアニメーション適用
+	void AnimateVertex(CModelX*model);
 };
 
 //CModelXFrameクラスの定義
@@ -208,6 +217,11 @@ public:
 	void Render();
 
 	void AnimateFrame();
+
+	//スキンウェイトのフレーム番号設定
+	void SetSkinWeightFrameIndex();
+	//頂点にアニメーションを適用
+	void AnimateVertex();
 };
 
 #endif

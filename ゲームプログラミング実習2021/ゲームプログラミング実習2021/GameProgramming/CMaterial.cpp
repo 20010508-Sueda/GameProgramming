@@ -63,38 +63,38 @@ CMaterial::CMaterial(CModelX*model)
 		// { ‚Å‚È‚¢‚Æ‚«‚Íƒ}ƒeƒŠƒAƒ‹–¼
 		strcpy(mName, model->mToken);
 		model->GetToken(); // {
-		printf("%s\n", mName);
+//		printf("%s\n", mName);
 	}
 
-	printf("Diffuse:");
+//	printf("Diffuse:");
 	mDiffuse[0] = model->GetFloatToken();
 	mDiffuse[1] = model->GetFloatToken();
 	mDiffuse[2] = model->GetFloatToken();
 	mDiffuse[3] = model->GetFloatToken();
-	printf("%10f", mDiffuse[0]);
-	printf("%10f", mDiffuse[1]);
-	printf("%10f", mDiffuse[2]);
-	printf("%10f\n", mDiffuse[3]);
+//	printf("%10f", mDiffuse[0]);
+//	printf("%10f", mDiffuse[1]);
+//	printf("%10f", mDiffuse[2]);
+//	printf("%10f\n", mDiffuse[3]);
 
-	printf("Power:");
+//	printf("Power:");
 	mPower = model->GetFloatToken();
-	printf("%10f\n", mPower);
+//	printf("%10f\n", mPower);
 
-	printf("Specular:");
+//	printf("Specular:");
 	mSpecular[0] = model->GetFloatToken();
 	mSpecular[1] = model->GetFloatToken();
 	mSpecular[2] = model->GetFloatToken();
-	printf("%10f", mSpecular[0]);
-	printf("%10f", mSpecular[1]);
-	printf("%10f\n", mSpecular[2]);
+//	printf("%10f", mSpecular[0]);
+//	printf("%10f", mSpecular[1]);
+//	printf("%10f\n", mSpecular[2]);
 
-	printf("Emissive:");
+//	printf("Emissive:");
 	mEmissive[0] = model->GetFloatToken();
 	mEmissive[1] = model->GetFloatToken();
 	mEmissive[2] = model->GetFloatToken();
-	printf("%10f", mEmissive[0]);
-	printf("%10f", mEmissive[1]);
-	printf("%10f\n", mEmissive[2]);
+//	printf("%10f", mEmissive[0]);
+//	printf("%10f", mEmissive[1]);
+//	printf("%10f\n", mEmissive[2]);
 
 	model->GetToken(); // TextureFilename or }
 
