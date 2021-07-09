@@ -111,6 +111,9 @@
     <ClCompile Include="CXCharacter.cpp">
       <Filter>ソース ファイル\Lib</Filter>
     </ClCompile>
+    <ClCompile Include="CXPlayer.cpp">
+      <Filter>ソース ファイル\Lib</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CSceneGame.h">
@@ -210,6 +213,9 @@
       <Filter>ソース ファイル\Lib</Filter>
     </ClInclude>
     <ClInclude Include="CXCharacter.h">
+      <Filter>ソース ファイル\Lib</Filter>
+    </ClInclude>
+    <ClInclude Include="CXPlayer.h">
       <Filter>ソース ファイル\Lib</Filter>
     </ClInclude>
   </ItemGroup>

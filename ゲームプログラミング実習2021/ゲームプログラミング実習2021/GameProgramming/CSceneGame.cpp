@@ -19,7 +19,7 @@ void CSceneGame::Init() {
 	//3Dモデルファイルの読み込み
 	CRes::sModelX.Load(MODEL_FILE);
 	//キャラクターにモデルを設定
-	mCharacter.Init(&CRes::sModelX);
+	mPlayer.Init(&CRes::sModelX);
 	//テキストフォントの読み込みと設定
 	mFont.LoadTexture("FontG.tga", 1, 4096 / 64);
 
@@ -27,11 +27,11 @@ void CSceneGame::Init() {
 
 
 void CSceneGame::Update() {
-	if (mCharacter.mAnimationFrame >= mCharacter.mAnimationFrameSize){
-		mCharacter.ChangeAnimation(mCharacter.mAnimationIndex+1, 60, 60);
-	}
+//	if (mCharacter.mAnimationFrame >= mCharacter.mAnimationFrameSize){
+//		mCharacter.ChangeAnimation(mCharacter.mAnimationIndex+1, 60, 60);
+//	}
 	//キャラクタークラスの更新
-	mCharacter.Update(CMatrix());
+	mPlayer.Update();
 
 	//カメラのパラメータを作成する
 	CVector e, c, u;//視点、注視点、上方向
@@ -66,7 +66,7 @@ void CSceneGame::Update() {
 	glMultMatrixf(Matrix.mF);
 	//モデル描画
 //	CRes::sModelX.Render();
-	mCharacter.Render();
+	mPlayer.Render();
 
 	//2D描画開始
 	CUtil::Start2D(0, 800, 0, 600);

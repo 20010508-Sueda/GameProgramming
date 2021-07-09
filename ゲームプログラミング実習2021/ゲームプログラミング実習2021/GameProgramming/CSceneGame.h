@@ -2,6 +2,7 @@
 #define CSCENEGAME_H
 #include "CScene.h"
 #include "CXCharacter.h"
+#include "CXPlayer.h"
 
 /*
 ゲームのシーン
@@ -15,7 +16,7 @@ public:
 	//更新処理のオーバーライド
 	void Update();
 	//キャラクタのインスタンス
-	CXCharacter mCharacter;
+	CXPlayer mPlayer;
 };
 
 #endif
