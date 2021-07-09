@@ -1,6 +1,7 @@
 #ifndef CSCENEGAME_H
 #define CSCENEGAME_H
 #include "CScene.h"
+#include "CXCharacter.h"
 
 /*
 ゲームのシーン
@@ -13,7 +14,8 @@ public:
 	void Init();
 	//更新処理のオーバーライド
 	void Update();
-
+	//キャラクタのインスタンス
+	CXCharacter mCharacter;
 };
 
 #endif

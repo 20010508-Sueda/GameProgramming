@@ -18,6 +18,8 @@ CSceneGame::~CSceneGame() {
 void CSceneGame::Init() {
 	//3Dモデルファイルの読み込み
 	CRes::sModelX.Load(MODEL_FILE);
+	//キャラクターにモデルを設定
+	mCharacter.Init(&CRes::sModelX);
 	//テキストフォントの読み込みと設定
 	mFont.LoadTexture("FontG.tga", 1, 4096 / 64);
 
@@ -25,18 +27,11 @@ void CSceneGame::Init() {
 
 
 void CSceneGame::Update() {
-	//最初のアニメーションの現在時間を0にする
-//	CRes::sModelX.mAnimationSet[0]->mTime = 0;
-	CRes::sModelX.mAnimationSet[0]->mTime += 1.0f;
-	CRes::sModelX.mAnimationSet[0]->mTime =
-		(int)CRes::sModelX.mAnimationSet[0]->mTime %
-		(int)(CRes::sModelX.mAnimationSet[0]->mMaxTime + 1);
-	//最初のアニメーションの重みを1.0(100%)にする
-	CRes::sModelX.mAnimationSet[0]->mWeight = 1.0f;
-	//フレームの変換行列をアニメーションで更新する
-	CRes::sModelX.AnimateFrame();
-	//フレームの合成行列を計算する
-	CRes::sModelX.mFrame[0]->AnimateCombined(&Matrix);
+	if (mCharacter.mAnimationFrame >= mCharacter.mAnimationFrameSize){
+		mCharacter.ChangeAnimation(mCharacter.mAnimationIndex+1, 60, 60);
+	}
+	//キャラクタークラスの更新
+	mCharacter.Update(CMatrix());
 
 	//カメラのパラメータを作成する
 	CVector e, c, u;//視点、注視点、上方向
@@ -69,10 +64,9 @@ void CSceneGame::Update() {
 	}
 	//行列設定
 	glMultMatrixf(Matrix.mF);
-	//頂点にアニメーションを適用する
-	CRes::sModelX.AnimateVertex();
 	//モデル描画
-	CRes::sModelX.Render();
+//	CRes::sModelX.Render();
+	mCharacter.Render();
 
 	//2D描画開始
 	CUtil::Start2D(0, 800, 0, 600);
